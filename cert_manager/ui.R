@@ -23,26 +23,15 @@ shinyUI(fluidPage(
             #             min = 1,
             #             max = 50,
             #             value = 30)
-            textInput("emailInput", label = "E-mail de inscriçao"),
-            actionButton("generate", label = "Gerar Certificado"),
+            textInput("nomeInput", label = "Nome utilizado na inscriçao."),
+            textInput("emailInput", label = "E-mail de inscriçao."),
+            actionButton("generate", label = "Gerar Certificado."),
         ),
 
         # Show a plot of the generated distribution
         mainPanel(
+            textOutput("not_found"),
             imageOutput("certificado")
         )
     )
 ))
-
-
-# 
-# textInput("emailInput", label = "E-mail de inscriçao"),
-# 
-# # actionButton("generate", label = "Gerar Certificado"),
-# 
-# 
-# # Show a plot of the generated distribution
-# mainPanel(
-#     plotOutput("distPlot")
-#     # imageOutput("certificado")
-# )

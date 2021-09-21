@@ -8,34 +8,13 @@
 #
 
 library(shiny)
+library(dotenv)
+library(magick)
+library(tidyverse)
+source("functions.R")
 
-verify_db <- function(email) {
-    
-}
 
-build_certificate <- function(email, name){
-    #dir <- glue::glue("{fs::file_temp()}.png")
-    
-    #iniciais <- gsub('(?<=[A-Z])[^A-Z]+', '', nome, perl = TRUE)
-    
-    magick::image_read(local) %>%
-        magick::image_annotate(text = nome,
-                               size = 50,
-                               location = "+700+800",
-                               color = "black") %>% # Location might need some adjustments!!!
-        magick::image_annotate(text = "1a Edicao - DEZ/2021", #Fill
-                               size = 50, #Fill
-                               location = "++", #Fill
-                               color = "black") %>%
-        magick::image_annotate(text = "", #Fill
-                               size = 50, #Fill
-                               location = "++", #Fill
-                               color = "black")
-        #magick::image_write(dir)
-}
-
-send_to_s3 <- function(cert) {}
-
+dotenv::load_dot_env("../.env")
 
 
 
@@ -44,9 +23,14 @@ shinyServer(function(input, output) {
     
     observeEvent(input$generate, {
         
-        db_return <- verify_db()
+        db_return <- verify_db(input$emailInput)
         
-        output$certificado <- build_certificate()
+        if(db_return) {
+            output$certificado <- build_certificate()    
+        } else {
+            output$not_found <- "A combinaçao nome+email nao foi encontrada no Banco de Dados."
+        }
+        
     })
     
     # output$distPlot <- renderPlot({
