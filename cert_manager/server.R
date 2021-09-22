@@ -14,7 +14,7 @@ library(tidyverse)
 source("functions.R")
 
 
-dotenv::load_dot_env("../.env")
+dotenv::load_dot_env("./.env")
 
 
 
