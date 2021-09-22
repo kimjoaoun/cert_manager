@@ -26,22 +26,12 @@ shinyServer(function(input, output) {
         db_return <- verify_db(input$emailInput)
         
         if(db_return) {
+            output$status <- "Inscriçao Encontrada."
             output$certificado <- build_certificate()    
         } else {
-            output$not_found <- "A combinaçao nome+email nao foi encontrada no Banco de Dados."
+            output$status <- "A combinaçao nome+email nao foi encontrada no Banco de Dados."
         }
         
     })
     
-    # output$distPlot <- renderPlot({
-    # 
-    #     # generate bins based on input$bins from ui.R
-    #     x    <- faithful[, 2]
-    #     bins <- seq(min(x), max(x), length.out = input$bins + 1)
-    # 
-    #     # draw the histogram with the specified number of bins
-    #     hist(x, breaks = bins, col = 'darkgray', border = 'white')
-    # 
-    # })
-
 })

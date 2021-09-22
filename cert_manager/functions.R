@@ -27,7 +27,10 @@ verify_db <- function(email, name) {
 
 
 send_to_s3 <- function(cert_path) {
-  aws.s3::put_object(cert_path, object = iniciais)
+  aws.s3::put_object(
+    cert_path, 
+    object = iniciais, 
+    bucket = Sys.getenv("BUCKET_ARN"))
 }
 
 
